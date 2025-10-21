@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.global.hr.mapper.EmployeeMapper;
 import com.global.hr.model.Employee;
 
 @Component
@@ -21,32 +22,34 @@ public class EmpRepoImp implements IEmpRepo {
 
 	@Override
 	public Employee findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return jdbcTemplate.queryForObject("select id, name, salary from employee where id = ?",
+				new Object[] {id},
+				new EmployeeMapper()
+				);
 	}
 
 	@Override
 	public int insert(Employee emp) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return jdbcTemplate.update("insert into employee (id, name, salary) values (?, ? ,?)", new Object[] {emp.getId(),emp.getName(),emp.getSalary()});
 	}
 
 	@Override
 	public int update(Employee emp) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return jdbcTemplate.update("update employee set name=? , salary=? where id = ?", new Object[] {emp.getName(),emp.getSalary(),emp.getId()});
 	}
 
 	@Override
 	public int delete(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return jdbcTemplate.update("delete from employee where id=?", new Object[] {id});
 	}
 
 	@Override
 	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcTemplate.query("select id, name, salary from employee", new EmployeeMapper());
 	}
 
 }
