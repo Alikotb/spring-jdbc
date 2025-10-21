@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DbCheckRunner implements CommandLineRunner {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void run(String... args) throws Exception {
-        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM sys.databases", Integer.class);
-        System.out.println("✅ Connected successfully! Total databases: " + count);
+//        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM sys.databases", Integer.class);
+//        System.out.println("✅ Connected successfully! Total databases: " + count);
     }
 }
 
