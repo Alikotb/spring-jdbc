@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.global.hr.mapper.EmployeeMapper;
@@ -13,6 +14,9 @@ import com.global.hr.model.Employee;
 public class EmpRepoImp implements IEmpRepo {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Override
 	public int count() {
@@ -30,9 +34,10 @@ public class EmpRepoImp implements IEmpRepo {
 	}
 
 	@Override
-	public int insert(Employee emp) {
+	public Employee insert(Employee emp) {
 		
-		return jdbcTemplate.update("insert into employee (id, name, salary) values (?, ? ,?)", new Object[] {emp.getId(),emp.getName(),emp.getSalary()});
+		 jdbcTemplate.update("insert into employee (id, name, salary) values (?, ? ,?)", new Object[] {emp.getId(),emp.getName(),emp.getSalary()});
+		 return emp;
 	}
 
 	@Override

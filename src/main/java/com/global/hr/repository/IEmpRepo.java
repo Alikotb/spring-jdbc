@@ -8,7 +8,7 @@ public interface IEmpRepo {
 	
 	int count();
 	Employee findById(Long id);
-	int insert(Employee emp);
+	Employee insert(Employee emp);
 	int update(Employee emp);
 	int delete(Long id);
 	List<Employee> findAll();
